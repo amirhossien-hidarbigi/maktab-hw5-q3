@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // تابع برای گرفتن آبجکت از کاربر
+      function getPersonFromUser() {
+        const name = prompt("لطفاً نام فرد را وارد کنید:");
+        const age = parseInt(prompt("لطفاً سن فرد را وارد کنید:"));
+
+        if (isNaN(age)) {
+          console.log("سن وارد شده معتبر نیست. لطفاً دوباره تلاش کنید.");
+          return null;
+        }
+
+        return { name, age };
+      }
+
+      // تابع برای گرفتن آرایه از آبجکت‌ها از کاربر
+      function getPeopleArrayFromUser() {
+        const people = [];
+        let continueInput = true;
+
+        while (continueInput) {
+          const person = getPersonFromUser();
+
+          if (person) {
+            people.push(person);
+            const continueInputString = prompt(
+              "آیا می‌خواهید ادامه دهید؟ (yes/no)"
+            );
+            continueInput = continueInputString.toLowerCase() === "yes";
+          } else {
+            continueInput = false;
+          }
+        }
+
+        return people;
+      }
+
+      // تابع برای مرتب‌سازی آبجکت‌ها بر اساس سن
+      function sortByAge(people) {
+        return people.sort((a, b) => a.age - b.age);
+      }
+
+      // اجرای توابع برای گرفتن اطلاعات از کاربر و مرتب‌سازی آبجکت‌ها بر اساس سن
+      const peopleArray = getPeopleArrayFromUser();
+      const sortedPeople = sortByAge(peopleArray);
+
+      // چاپ آبجکت‌ها بر اساس سن مرتب‌شده
+      console.log("آبجکت‌ها بر اساس سن مرتب شده:");
+      sortedPeople.forEach(person => {
+        console.log(`نام: ${person.name}, سن: ${person.age}`);
+      });
+    </script>
+  </body>
+</html>
